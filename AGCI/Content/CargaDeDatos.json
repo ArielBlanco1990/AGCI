@@ -1,0 +1,77 @@
+[
+  {
+    "Componente": "I- COMPONENTE AMBIENTE DE CONTROL",
+    "Normas": [
+      {
+        "Norma": "Planeación, planes de trabajo anual, mensual e individual.",
+        "GrupoPregunta": [
+          {
+            "Grupo": "Objetivos de trabajo de la entidad a mediano y largo plazo. Estrategia Integral",
+            "Preguntas": [
+              {
+                "Pregunta": "a) Se encuentran definidos los objetivos en correspondencia con la misión y la estrategia integral aprobada.1.2"
+              },
+              {
+                "Pregunta": "b) Se corresponden con las prioridades del país y los recursos disponibles."
+              },
+              {
+                "Pregunta": "c) Se encuentra incluido el Sistema de Información, específicamente la contribución al Sistema Estadístico Nacional."
+              },
+              {
+                "Pregunta": "d) Son puntualizados y ajustados anualmente por cada responsable."
+              },
+              {
+                "Pregunta": "e) Los trabajadores conocen los objetivos de trabajo con sus indicadores."
+              },
+              {
+                "Pregunta": "f) Se realizan evaluaciones y análisis periódicos sobre su cumplimiento y se toman las medidas correctivas que correspondan."
+              },
+              {
+                "Pregunta": "g) El jefe de la entidad dirige este proceso y el órgano colegiado participa activamente."
+              },
+              {
+                "Pregunta": "h) Los criterios de medida asociados a los objetivos de trabajo son concretos y permiten medir el estado de cumplimiento de los mismo"
+              },
+              {
+                "Pregunta": "El proceso de la planificación se ajusta a lo dispuesto en la Instrucción 1/11  del Presidente de los Consejos de Estado y de Ministros y su implementación la Instrucción 1/2018 del Presidente de AZCUBA"
+              }
+
+            ]
+          },
+          {
+            "Grupo": "Se explota el Sistema automatizado de planificación de actividades, según proceda su implementación:",
+            "Preguntas": [
+              {
+                "Pregunta": "a) Si se encuentra instalado el sistema."
+              },
+              {
+                "Pregunta": "b) Si se está explotando el sistema."
+              },
+              {
+                "Pregunta": "El plan anual de actividades asegura la correspondencia entre los objetivos de trabajo, las actividades y los recursos aprobados en el plan económico de la entidad y con el nivel a que se subordina."
+              }
+
+            ]
+          },
+          {
+            "Grupo": "Para la elaboración del plan anual de actividades, según proceda se debe tener en cuenta entre otros aspectos los siguientes:",
+            "Preguntas": [
+              {
+                "Pregunta": "a) La misión de la entidad."
+              },
+              {
+                "Pregunta": "b) Prioridades del país."
+              },
+              {
+                "Pregunta": "c) Los objetivos de trabajo."
+              }
+
+            ]
+          }
+        ]
+      }
+
+    ]
+  }
+
+]
