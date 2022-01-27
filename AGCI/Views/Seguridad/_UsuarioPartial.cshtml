@@ -1,0 +1,48 @@
+﻿@model AGCI.ViewModels.UsuarioAGCIViewModel
+
+@if (Model == null)
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.UsuarioViewModel.NombreUsuario, new { @class = "col-md-4 control-label" })
+        <div class="col-md-8">
+            @Html.TextBoxFor(m => m.UsuarioViewModel.NombreUsuario, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.UsuarioViewModel.NombreUsuario)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.UsuarioViewModel.CorreoElectronico, new { @class = "col-md-4 control-label" })
+        <div class="col-md-8">
+            @Html.TextBoxFor(m => m.UsuarioViewModel.CorreoElectronico, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.UsuarioViewModel.CorreoElectronico)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.UsuarioViewModel.Contraseña, new { @class = "col-md-4 control-label" })
+        <div class="col-md-8">
+            @Html.PasswordFor(m => m.UsuarioViewModel.Contraseña, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.UsuarioViewModel.Contraseña)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.UsuarioViewModel.ConfimaContraseña, new { @class = "col-md-4 control-label" })
+        <div class="col-md-8">
+            @Html.PasswordFor(m => m.UsuarioViewModel.ConfimaContraseña, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.UsuarioViewModel.ConfimaContraseña)
+        </div>
+    </div>
+}
+else
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.UsuarioViewModel.NombreUsuario, new { @class = "col-md-4 control-label" })
+        <div class="col-md-8">
+            @Html.DisplayFor(m => m.UsuarioViewModel.NombreUsuario, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.UsuarioViewModel.CorreoElectronico, new { @class = "col-md-4 control-label" })
+        <div class="col-md-8">
+            @Html.DisplayFor(m => m.UsuarioViewModel.CorreoElectronico, new { @class = "form-control" })
+        </div>
+    </div>
+}

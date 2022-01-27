@@ -1,0 +1,127 @@
+﻿@model IEnumerable<AGCI.Models.Trabajador>
+@{
+    ViewBag.Title = "Listado de Usuarios";
+}
+
+@Html.ActionLink("Agregar Usuario", "CrearUsuario", "Seguridad", null, new { @class = "btn btn-info" })
+
+<div>
+    @*@if (TempData["exito"] != null)
+        {
+            <div class="alert alert-dismissable alert-success">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>Advertencia!</strong> @TempData["exito"].
+            </div>
+        }
+        @if (TempData["advertencia"] != null)
+        {
+            <div class="alert alert-dismissable alert-danger">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>Advertencia!</strong> @TempData["advertencia"].
+            </div>
+
+
+        }*@
+
+    <table class="table dynamic">
+        <thead>
+            <tr>
+
+                <th>
+                    Nombre y Apellidos
+                </th>
+                <th>
+                    Nombre de usuario
+                </th>
+                <th>
+                    Rol
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Usuario.Activo)
+                </th>
+                @if (User.IsInRole("ADMINISTRADOR_AGCI"))
+                {
+                    <th>Acciones</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreCompleto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Usuario.UserName)
+                    </td>
+                    <td>
+                        @item.Usuario.Roles.First().Role.Name
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Usuario.Activo)
+                    </td>
+                    @if (User.IsInRole("ADMINISTRADOR_AGCI"))
+                    {
+                        <td>
+                            <button class="restartpasswdord btn btn-primary" id="@item.UsuarioId">Reiniciar Contraseña</button>
+                        </td>
+                        <td>
+                            @Ajax.ActionLink("Eliminar", "Eliminar", new { id = item.Id }, new AjaxOptions { OnComplete = "complete", UpdateTargetId = "inactivarUser_form" }, new { @class = "btn btn-danger" })
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div id="modal-inactivar" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">@ViewBag.Titulo</h4>
+            </div>
+            <div id="inactivarUser_form">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="reinicarcontraseña" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <h3 class="alert-warning text-center">¿Desea reiniciar la contraseña de este usuario?</h3>
+            <form action="RestartPassword" method="POST">
+                @Html.AntiForgeryToken()
+                <div class="modal-footer">
+                    <button id="restart_confirmed" name="UserName" type="submit" class="btn btn-danger">Reiniciar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.restartpasswdord').on('click', function () {
+                $('#restart_confirmed').attr("value", this.id);
+                $('#reinicarcontraseña').modal();
+            });
+        });
+        function complete(context) {
+            $('#modal-inactivar').modal('show');
+        }
+
+        function cerrarmodal(context) {
+            $('#modal-inactivar').modal('close');
+        }
+    </script>
+}

@@ -1,0 +1,90 @@
+﻿@model AGCI.Models.PlanDeMedida
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PlanDeMedida</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Guia.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Guia.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Numerador)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Numerador)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Numero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Numero)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeficienciasSeñaladas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeficienciasSeñaladas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CausasCondiciones)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CausasCondiciones)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Medidas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Medidas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ejecutor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ejecutor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Controla)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Controla)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCumplimiento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCumplimiento)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

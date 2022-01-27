@@ -1,0 +1,82 @@
+﻿@model AGCI.Models.PlanDeMedida
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+
+<h3>Editar M</h3>
+<hr />
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="col-md-10">
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.Numerador)
+            @Html.HiddenFor(model => model.GuiaId)
+            @Html.HiddenFor(model => model.Numero)
+            @Html.HiddenFor(model => model.DeficienciasSeñaladas)
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CausasCondiciones, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.TextAreaFor(model => model.CausasCondiciones, new { htmlAttributes = new { @class = "form-control" }, style="width:100%;", rows="5"} )
+                    @Html.ValidationMessageFor(model => model.CausasCondiciones, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Medidas, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.TextAreaFor(model => model.Medidas, new { htmlAttributes = new { @class = "form-control" }, style="width:100%;", rows="5"})
+                    @Html.ValidationMessageFor(model => model.Medidas, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Ejecutor, "Ejecutor", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.DropDownList("EjecutorId", null, htmlAttributes: new { @class = "form-control", @chosen="chosen" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Controla, "Controla", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.DropDownList("ControlaId", null, htmlAttributes: new { @class = "form-control", @chosen="chosen" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.FechaCumplimiento, new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.FechaCumplimiento)
+                    @Html.ValidationMessageFor(model => model.FechaCumplimiento)
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="col-md-offset-9 col-md-3">
+                    <a class="btn btn-default" href="@Url.Action("Details", "Guias", new {id = @ViewBag.Guia})">Atrás</a>
+                    <input type="submit" value="Guardar" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

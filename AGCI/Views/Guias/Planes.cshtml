@@ -1,0 +1,109 @@
+﻿@model IEnumerable<AGCI.Models.PlanDeMedida>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h2>Planes de Medidas en la Guía</h2>
+<hr />
+<div class="col-md-12 text-right">
+    <p>
+        <a class="btn btn-default" href="@Url.Action("Details", "Guias", new {id = @ViewBag.Guia})">Atrás</a>
+        <a class="btn btn-info" href="@Url.Action("GenerarPlan","Reportes", new {id = @ViewBag.Guia})"> <i class="glyphicon glyphicon-stats"></i> Generar Plan</a>
+    </p>
+</div>
+
+
+<table class="table dynamic table-bordered table-striped" style="font-size:smaller;">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Numerador)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Numero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeficienciasSeñaladas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CausasCondiciones)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Medidas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ejecutor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Controla)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaCumplimiento)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Numerador)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Numero)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeficienciasSeñaladas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CausasCondiciones)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Medidas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ejecutor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Controla)
+                </td>
+                <td>
+                    @if (@item.FechaCumplimiento != null)
+                    {
+                        @item.FechaCumplimiento.Value.ToShortDateString()
+                    }
+
+                </td>
+                @if (!User.IsInRole("CONSULTOR_AGCI"))
+                {
+                    <td class="text-right">
+                        <a class="btn btn-warning btn-sm edit" data-toggle="tooltip" data-placement="top" title="Editar" href="@Url.Action("Edit", "PlanDeMedidas", new { Id = item.Id })"><i class="glyphicon glyphicon-edit"></i></a>
+                    </td>
+                }
+            </tr>
+        }
+
+
+    </tbody>
+</table>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.datatables.min.js"></script>
+    <script src="~/Scripts/datatable.date-uk.typedetection.js"></script>
+    <script src="~/Scripts/mbs-qdtf.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.edithora').tooltip();
+            $('.edit').tooltip();
+            $('.eliminar').tooltip();
+            $('.view').tooltip();
+            $('.print').tooltip();
+        });
+    </script>
+}
+

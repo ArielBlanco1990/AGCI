@@ -1,0 +1,186 @@
+﻿@model IEnumerable<AGCI.Models.ContenidoGuia>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Detalles Guías de Autocontrol</h2>
+<hr />
+<div class="col-md-12 text-right">
+    <p>
+        <a class="btn btn-success" href="@Url.Action("Check","ContenidoGuias" , new {Id = @ViewBag.GuiaId})"> <i class="glyphicon glyphicon-check"></i> Si a todo</a>
+        <a class="btn btn-info" href="@Url.Action("Planes","Guias", new {Id = @ViewBag.GuiaId})"> <i class="glyphicon glyphicon-list-alt"></i> Planes de Medidas</a>
+    </p>
+</div>
+<table class="table dynamic table-bordered table-striped" style="font-size:smaller;">
+    <thead>
+        <tr>
+            <th class="text-center hidden">
+                Id
+            </th>
+            <th class="text-center">
+                CGR
+            </th>
+            <th class="text-center">
+                Otros
+            </th>
+            <th class="text-center">
+                No. P/Med
+            </th>
+            <th>
+                #Preg
+            </th>
+            <th class="col-md-4 text-center">
+                No. 1 GUIA DE LA DIRECCION EMPRESA - @ViewBag.Unidad
+            </th>
+
+            <th class="col-md-1 text-center">
+                S
+            </th>
+            <th class="col-md-1 text-center">
+                NO
+            </th>
+            <th class="col-md-1 text-center">
+                NP
+            </th>
+            <th class="col-md-2 text-center">
+                Responsable
+            </th>
+            <th class="col-md-2 text-center">
+                Jefe Inmediato
+            </th>
+            @if (!User.IsInRole("CONSULTOR_AGCI"))
+            {
+                <th>
+
+                </th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var mycolor = "";
+            if (@item.Tipo.Equals("Componente"))
+            {
+                mycolor = "color2";
+            }
+            if (@item.Tipo.Equals("Norma"))
+            {
+                mycolor = "color3";
+            }
+            if (@item.Tipo.Equals("Grupo"))
+            {
+                mycolor = "color4";
+            }
+            <tr class="@mycolor">
+                <td class="text-center hidden">
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.CGR)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Otros)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.NoP)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.NoPreguntas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Si)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.No)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Np)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Responsable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JefeInmediato)
+                </td>
+                @if (!User.IsInRole("CONSULTOR_AGCI"))
+                {
+            <td class="col-md-1 text-right">
+                @if (User.IsInRole("ADMINISTRADOR_AGCI") || User.IsInRole("AUDITOR_AGCI"))
+                {
+                    if (item.Tipo == "Pregunta")
+                    {
+                        if (item.FechaDeVencimiento == null || (item.FechaDeVencimiento.Value > DateTime.Now))
+                        {
+                            <a class="btn btn-warning btn-sm edit" data-toggle="tooltip" data-placement="top" title="Editar" href="@Url.Action("Editar", "ContenidoGuias", new { Id = item.Id })"><i class="glyphicon glyphicon-edit"></i></a>
+                            <a class="btn btn-danger btn-sm clean" data-toggle="tooltip" data-placement="top" title="Restaurar" href="@Url.Action("Clean", "ContenidoGuias", new { Id = item.Id })"><i class="glyphicon glyphicon-refresh"></i></a>
+                        }
+
+                    }
+                }
+                else
+                {
+                    <a class="btn btn-warning btn-sm edit" data-toggle="tooltip" data-placement="top" title="Editar" href="@Url.Action("Edit", "ContenidoGuias", new { Id = item.Id })"><i class="glyphicon glyphicon-edit"></i></a>
+
+                }
+
+                @*@if (User.IsInRole("ADMINISTRADOR_AGCI") || User.IsInRole("AUDITOR_AGCI"))
+        {
+            if (item.NoPreguntas > 0)
+            {
+
+
+                if (item.Otros == null && item.Numero == null && item.NoP == null)
+                {
+
+                }
+                else
+                {
+                    <a class="btn btn-warning btn-sm edit" data-toggle="tooltip" data-placement="top" title="Editar" href="@Url.Action("Editar", "ContenidoGuias", new { Id = item.Id })"><i class="glyphicon glyphicon-edit"></i></a>
+                    <a class="btn btn-danger btn-sm clean" data-toggle="tooltip" data-placement="top" title="Restaurar" href="@Url.Action("Clean", "ContenidoGuias", new { Id = item.Id })"><i class="glyphicon glyphicon-refresh"></i></a>
+                }
+
+            }
+            else
+            {
+
+            }
+        }
+        else
+        {
+            <a class="btn btn-warning btn-sm edit" data-toggle="tooltip" data-placement="top" title="Editar" href="@Url.Action("Edit", "ContenidoGuias", new { Id = item.Id })"><i class="glyphicon glyphicon-edit"></i></a>
+
+        }*@
+
+
+
+            </td>
+                }
+
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.datatables.min.js"></script>
+    <script src="~/Scripts/datatable.date-uk.typedetection.js"></script>
+    <script src="~/Scripts/mbs-qdtftwo.js"></script>
+    <script>
+        $(document).ready(function () {
+
+
+            $('.edithora').tooltip();
+            $('.edit').tooltip();
+            $('.eliminar').tooltip();
+            $('.view').tooltip();
+            $('.clean').tooltip();
+        });
+    </script>
+}

@@ -1,0 +1,62 @@
+﻿@using AGCI.Models
+@model IEnumerable<AGCI.ViewModels.AreaViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Listado de Áreas</h2>
+<hr />
+@if (User.IsInRole("ADMINISTRADOR_AGCI") || User.IsInRole("AUDITOR_AGCI"))
+{
+    <p>
+        <a class="btn btn-success" href="@Url.Action("Insertar", "Area")"> <i class="glyphicon glyphicon-plus"></i> Nueva</a>
+    </p>
+}
+
+    <table class="table dynamic">
+        <thead>
+            <tr>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Entidad
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnidadOrganizativa)
+                    </td>
+                    <td class="text-right">
+                        <a class="btn btn-warning btn-sm edit" data-toggle="tooltip" data-placement="top" title="Editar" href="@Url.Action("Editar", new {Id = item.Id})"><i class="glyphicon glyphicon-edit"></i></a>
+                        <a class="btn btn-danger btn-sm eliminar" data-toggle="tooltip" data-placement="top" title="Eliminar" href="@Url.Action("Eliminar", new {Id = item.Id})"><i class="glyphicon glyphicon-trash"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script src="~/Scripts/jquery.datatables.min.js"></script>
+        <script src="~/Scripts/datatable.date-uk.typedetection.js"></script>
+        <script src="~/Scripts/mbs-qdtf.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('.edithora').tooltip();
+                $('.edit').tooltip();
+                $('.eliminar').tooltip();
+                $('.view').tooltip();
+                $('.print').tooltip();
+            });
+        </script>
+    }

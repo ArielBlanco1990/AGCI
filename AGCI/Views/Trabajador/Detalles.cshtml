@@ -1,0 +1,42 @@
+﻿@model AGCI.Models.Trabajador
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="formpanel panel-default">
+    <div class="panel-heading">
+        <h3 class="text-center">Detalles Trabajador</h3>
+    </div>
+    <div class="panel-body">
+
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Ci)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Ci)
+                </dd>
+
+                <dt>
+                    Cargo
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PuestoDeTrabajo.Cargo.Nombre)
+                </dd>
+            </dl>
+        </div>
+        <div class="panel-footer">
+            <div class="form-group">
+                <div class="col-md-offset-9 col-md-3">
+                    <a class="btn btn-info" href="@Url.Action("Index","Trabajador")">Cerrar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

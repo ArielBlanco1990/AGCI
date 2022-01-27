@@ -1,0 +1,114 @@
+﻿@model IEnumerable<AGCI.Models.UnidadOrganizativa>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Listado de Entidades</h2>
+<hr />
+@if (User.IsInRole("ADMINISTRADOR_AGCI"))
+{
+    <p>
+        <a class="btn btn-success" href="@Url.Action("Create", "UnidadOrganizativa")"> <i class="glyphicon glyphicon-plus"></i> Nueva Entidad</a>
+    </p>
+}
+    <table class="table dynamic">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Detalle)
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Detalle)
+                    </td>
+
+
+                    <td class="text-right col-md-1">
+                        @if (User.IsInRole("ADMINISTRADOR_AGCI"))
+                        {
+                            <a data-toggle="tooltip" data-placement="top" title="Editar" class="btn btn-warning btn-sm edit" href="@Url.Action("Edit", "UnidadOrganizativa", new { id = item.Id }) ">
+                                <span class=" glyphicon glyphicon glyphicon-edit " aria-hidden="true"></span>
+                            </a>
+
+                            <a data-toggle="tooltip" data-placement="top" title="Eliminar" class="btn btn-danger btn-sm delete" href="@Url.Action("Delete", "UnidadOrganizativa", new { id = item.Id })">
+                                <span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </a>
+                        }
+                        </td>
+                </tr>
+            }
+        <tbody>
+    </table>
+
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script src="~/Scripts/jquery.datatables.min.js"></script>
+        <script src="~/Scripts/datatable.date-uk.typedetection.js"></script>
+        <script src="~/Scripts/mbs-qdtf.js"></script>
+        <script>
+
+
+            jQuery(document).ready(function () {
+
+                jQuery('#table1').dataTable();
+
+                jQuery('#table2').dataTable({
+                    "sPaginationType": "full_numbers"
+                });
+
+                // Chosen Select
+                jQuery("select").chosen({
+                    'min-width': '100px',
+                    'white-space': 'nowrap',
+                    disable_search_threshold: 10
+                });
+
+                // Delete row in a table
+                jQuery('.delete-row').click(function () {
+                    var c = confirm("Continue delete?");
+                    if (c)
+                        jQuery(this).closest('tr').fadeOut(function () {
+                            jQuery(this).remove();
+                        });
+
+                    return false;
+                });
+
+                // Show aciton upon row hover
+                jQuery('.table-hidaction tbody tr').hover(function () {
+                    jQuery(this).find('.table-action-hide a').animate({ opacity: 1 });
+                }, function () {
+                    jQuery(this).find('.table-action-hide a').animate({ opacity: 0 });
+                });
+
+                $(document).ready(function () {
+                    $('.edit').tooltip();
+                    $('.delete').tooltip();
+                    $('.view').tooltip();
+                    $('.list').tooltip();
+                    $('.list2').tooltip();
+
+                });
+
+            });
+        </script>
+    }
+
+
+
+
+
+

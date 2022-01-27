@@ -1,0 +1,72 @@
+﻿@model AGCI.ViewModels.UsuarioAGCIViewModel
+@{
+    ViewBag.Title = "Crear usuario";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+@using (Html.BeginForm("CrearUsuario", "Seguridad", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <hr />
+    @Html.ValidationSummary()
+<div class="col-md-8 col-md-offset-2">
+    <input hidden id="UsuarioViewModel.Contraseña" name="UsuarioViewModel.Contraseña" value="A123456-" />
+    <input hidden id="UsuarioViewModel.ConfirmarContraseña" name="UsuarioViewModel.ConfirmarContraseña" value="A123456-" />
+    <input hidden id="UsuarioViewModel.CorreoElectronico" name="UsuarioViewModel.CorreoElectronico" value="usuario@azumat.cu" />
+    
+    <div class="form-group">
+        @Html.LabelFor(model => model.UsuarioViewModel.NombreUsuario, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.UsuarioViewModel.NombreUsuario, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.UsuarioViewModel.NombreUsuario, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div id="datos-usuarios">
+
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Rol, "Rol", new { @class = "col-md-4 control-label" })
+        <div class="col-md-8">
+            @Html.DropDownList("Rol", null, String.Empty, new { @class = "form-control select", @chosen="chosen" })
+            @Html.ValidationMessageFor(m => m.Rol)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-4 col-md-8">
+            @Html.ActionLink("Atrás", "ListaUsuario", "Usuario", new { @class = "btn btn-default" })
+            <input type="submit" class="btn btn-success" value="Crear" />
+        </div>
+    </div>
+</div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+
+            $(".select").chosen();
+
+            if ($("#TrabajadorId option:selected").val() != null) {
+                var url = '@Url.Action("DatosDeUsuario","Seguridad")';
+
+                url = url + "/" + $("#TrabajadorId option:selected").val();
+                $("#datos-usuarios").load(url, function () {
+                    $("#crear-btn").removeClass('disabled').val("Crear");
+                });
+            }
+
+            $("#TrabajadorId").change(function () {
+                $("#crear-btn").addClass('disabled').val("Cargando ...");
+                var url = '@Url.Action("DatosDeUsuario","Seguridad")';
+
+                url = url + "/" + $("#TrabajadorId option:selected").val();
+                $("#datos-usuarios").load(url, function () {
+                    $("#crear-btn").removeClass('disabled').val("Crear");
+                });
+            });
+        });
+    </script>
+}

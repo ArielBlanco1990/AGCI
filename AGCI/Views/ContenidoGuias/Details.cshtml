@@ -1,0 +1,138 @@
+﻿@model AGCI.Models.ContenidoGuia
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ContenidoGuia</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Guia.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Guia.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CGR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CGR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Otros)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Otros)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoPreguntas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoPreguntas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Numero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Numero)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Si)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Si)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.No)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.No)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Np)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Np)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Responsable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Responsable)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JefeInmediato)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JefeInmediato)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Direccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Direccion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ComponenteDescripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComponenteDescripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Norma)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Norma)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,89 @@
+﻿@model IEnumerable<AGCI.Models.Guia>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Guías de Autocontrol</h2>
+<hr />
+
+<div>
+    @if (User.IsInRole("ADMINISTRADOR_AGCI") || User.IsInRole("AUDITOR_AGCI"))
+    {
+        <p>
+            <a class="btn btn-success" href="@Url.Action("Create", "Guias")"> <i class="glyphicon glyphicon-plus"></i> Nueva</a>
+
+
+          @*  <a class="btn btn-primary" href="@Url.Action("CreateFull", "Guias")"> <i class="glyphicon glyphicon-plus"></i> Generar Guias de un Mes</a>*@
+        </p>
+    }
+</div>
+<table class="table dynamic">
+    <thead>
+        <tr>
+            <th class="hidden">
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Area.Nombre)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Año)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Mes)
+            </th>
+            <th class="text-center">
+                Cantidad de Planes de Medidas
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="hidden">
+                    @Html.DisplayFor(modelItem => item.Numerador)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Area.Nombre)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Año)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Mes)
+                </td>
+                <td class="text-center">
+                    @item.PlanDeMedidas.Count()
+                </td>
+                <td class="text-right">
+
+                    <a class="btn btn-info btn-sm view" data-toggle="tooltip" data-placement="top" title="Detalles" href="@Url.Action("Details", new { Id = item.Id })"><i class="glyphicon glyphicon-eye-open"></i></a>
+                    <a class="btn btn-warning btn-sm report" data-toggle="tooltip" data-placement="top" title="Generar Informe" href="@Url.Action("GenerarGuia", "Reportes", new { Id = item.Id })"><i class="glyphicon glyphicon-stats"></i></a>
+                    @if (User.IsInRole("ADMINISTRADOR_AGCI") || User.IsInRole("AUDITOR_AGCI"))
+                    {
+                        <a class="btn btn-danger btn-sm eliminar" data-toggle="tooltip" data-placement="top" title="Eliminar" href="@Url.Action("Delete", new { Id = item.Id })"><i class="glyphicon glyphicon-trash"></i></a>
+                    }
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.datatables.min.js"></script>
+    <script src="~/Scripts/datatable.date-uk.typedetection.js"></script>
+    <script src="~/Scripts/mbs-qdtf.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.edithora').tooltip();
+            $('.edit').tooltip();
+            $('.eliminar').tooltip();
+            $('.view').tooltip();
+            $('.report').tooltip();
+        });
+    </script>
+}

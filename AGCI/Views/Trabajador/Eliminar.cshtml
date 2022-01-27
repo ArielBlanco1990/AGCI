@@ -1,0 +1,49 @@
+﻿@model AGCI.Models.Trabajador
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="formpanel panel-default">
+    <div class="panel-heading">
+        <h3 class="text-center">Eliminar Trabajador</h3>
+    </div>
+    <div class="panel-body">
+        <h3 class="alert-danger">¿Realmente desea eliminar este trabajador?</h3>
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.NombreCompleto)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NombreCompleto)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Usuario)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Usuario.UserName)
+            </dd>
+
+
+        </dl>
+        <div class="">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    <div class="col-md-offset-9 col-md-3">
+                        <input type="submit" value="Eliminar" class="btn btn-danger" />
+                        <a class="btn btn-info" href="@Url.Action("Index","Trabajador")">Cancelar</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+</div>
+

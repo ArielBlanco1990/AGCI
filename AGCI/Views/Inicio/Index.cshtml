@@ -1,0 +1,69 @@
+﻿@model IEnumerable<AGCI.ViewModels.EstadisticaViewModel>
+
+@{
+    ViewBag.Title = "Página Principal";
+}
+
+<h2>RESUMEN DE TODAS LAS ACTIVIDADES </h2>
+<h3> @ViewBag.Fecha </h3>
+<hr />
+
+<table class="table dynamic">
+
+    <thead>
+
+        <tr>
+
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.ACTIVIDAD)
+            </th>
+            <th class="text-center success">
+                @Html.DisplayNameFor(model => model.POSITIVO_Cant)
+            </th>
+            <th class="text-center success">
+                @Html.DisplayNameFor(model => model.POSITIVO_Porc)
+            </th>
+            <th class="text-center danger">
+                @Html.DisplayNameFor(model => model.NEGATIVO_Cant)
+            </th>
+            <th class="text-center danger">
+                @Html.DisplayNameFor(model => model.NEGATIVO_Porc)
+            </th>
+            <th class="text-center warning">
+                @Html.DisplayNameFor(model => model.NO_PROCEDE_Cant)
+            </th>
+            <th class="text-center warning">
+                @Html.DisplayNameFor(model => model.NO_PROCEDE_Porc)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td> @Html.DisplayFor(modelItem => item.ACTIVIDAD)</td>
+                <td class="text-center"> @Html.DisplayFor(modelItem => item.POSITIVO_Cant)</td>
+                <td class="text-center"> @Html.DisplayFor(modelItem => item.POSITIVO_Porc)</td>
+                <td class="text-center"> @Html.DisplayFor(modelItem => item.NEGATIVO_Cant)</td>
+                <td class="text-center">@Html.DisplayFor(modelItem => item.NEGATIVO_Porc) </td>
+                <td class="text-center">@Html.DisplayFor(modelItem => item.NO_PROCEDE_Cant)</td>
+                <td class="text-center">@Html.DisplayFor(modelItem => item.NO_PROCEDE_Porc)</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.datatables.min.js"></script>
+    <script src="~/Scripts/datatable.date-uk.typedetection.js"></script>
+    <script src="~/Scripts/mbs-qdtf.js"></script>
+    <script>
+        $(document).ready(function () {
+
+        });
+    </script>
+}

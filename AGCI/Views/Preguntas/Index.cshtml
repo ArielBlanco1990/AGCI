@@ -1,0 +1,73 @@
+﻿@model IEnumerable<AGCI.Models.Pregunta>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h2>Listado de Preguntas</h2>
+<hr />
+@if (User.IsInRole("ADMINISTRADOR_AGCI") || User.IsInRole("AUDITOR_AGCI"))
+{
+    <p>
+        <a class="btn btn-success" href="@Url.Action("Create", "Preguntas")"> <i class="glyphicon glyphicon-plus"></i> Nueva</a>
+    </p>
+}
+    <table class="table dynamic">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th>
+                    Grupo/Norma
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td class="col-md-6">
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td class="col-md-4">
+                        @if (item.NormaId != null)
+                        {
+                            <span>Norma:</span> @Html.DisplayFor(modelItem => item.NormaName)
+                        }
+                        @if (item.GrupoPreguntaId != null)
+                        {
+                            <span>Grupo:</span> @Html.DisplayFor(modelItem => item.GrupoPregunta.Nombre)
+                        }
+
+                    </td>
+                    <td class="text-right">
+                        @if (User.IsInRole("ADMINISTRADOR_AGCI") || User.IsInRole("AUDITOR_AGCI"))
+                        {
+                            <a class="btn btn-warning btn-sm edit" data-toggle="tooltip" data-placement="top" title="Editar" href="@Url.Action("Edit", new { Id = item.Id })"><i class="glyphicon glyphicon-edit"></i></a>
+                            <a class="btn btn-danger btn-sm eliminar" data-toggle="tooltip" data-placement="top" title="Eliminar" href="@Url.Action("Delete", new { Id = item.Id })"><i class="glyphicon glyphicon-trash"></i></a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script src="~/Scripts/jquery.datatables.min.js"></script>
+        <script src="~/Scripts/datatable.date-uk.typedetection.js"></script>
+        <script src="~/Scripts/mbs-qdtf.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('.edithora').tooltip();
+                $('.edit').tooltip();
+                $('.eliminar').tooltip();
+                $('.view').tooltip();
+                $('.print').tooltip();
+            });
+        </script>
+    }
+

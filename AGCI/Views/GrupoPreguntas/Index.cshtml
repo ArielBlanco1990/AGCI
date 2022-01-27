@@ -1,0 +1,74 @@
+﻿@model IEnumerable<AGCI.Models.GrupoPregunta>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h2>Listado de Grupo de Preguntas</h2>
+<hr />
+@if (User.IsInRole("ADMINISTRADOR_AGCI") || User.IsInRole("AUDITOR_AGCI"))
+{
+    <p>
+        <a class="btn btn-success" href="@Url.Action("Create", "GrupoPreguntas")"> <i class="glyphicon glyphicon-plus"></i> Nuevo</a>
+
+    </p>
+}
+    <table class="table dynamic">
+        <thead>
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th>
+                    Norma
+                </th>
+                <th>
+                    Componente
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Norma.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Norma.Componente.Nombre)
+                    </td>
+                    <td class="text-right">
+                        @if (User.IsInRole("ADMINISTRADOR_AGCI") || User.IsInRole("AUDITOR_AGCI"))
+                        {
+                            <a class="btn btn-success btn-sm add" data-toggle="tooltip" data-placement="top" title="Agregar Pregunta" href="@Url.Action("CreatePregunta", new { Id = item.Id })"><i class="glyphicon glyphicon-plus"></i></a>
+                            <a class="btn btn-warning btn-sm edit" data-toggle="tooltip" data-placement="top" title="Editar" href="@Url.Action("Edit", new { Id = item.Id })"><i class="glyphicon glyphicon-edit"></i></a>
+                            <a class="btn btn-danger btn-sm eliminar" data-toggle="tooltip" data-placement="top" title="Eliminar" href="@Url.Action("Delete", new { Id = item.Id })"><i class="glyphicon glyphicon-trash"></i></a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script src="~/Scripts/jquery.datatables.min.js"></script>
+        <script src="~/Scripts/datatable.date-uk.typedetection.js"></script>
+        <script src="~/Scripts/mbs-qdtf.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('.add').tooltip();
+                $('.edit').tooltip();
+                $('.eliminar').tooltip();
+                $('.view').tooltip();
+                $('.print').tooltip();
+            });
+        </script>
+    }

@@ -1,0 +1,58 @@
+﻿@model AGCI.Models.Guia
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+<div class="formpanel panel-default">
+    <div class="panel-heading">
+        <h3 class="text-center">Eliminar Guía</h3>
+    </div>
+    <div class="panel-body">
+        <h3 class="alert-danger">¿Realmente desea eliminar esta guía?</h3>
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Area.Nombre)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Area.Nombre)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Año)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Año)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Mes)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Mes)
+            </dd>
+
+
+        </dl>
+        <div class="panel-footer">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    <div class="col-md-offset-9 col-md-3">
+                        <input type="submit" value="Eliminar" class="btn btn-danger" />
+                        <a class="btn btn-default" href="@Url.Action("Index","Guias")">Cancelar</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+</div>
+
+
